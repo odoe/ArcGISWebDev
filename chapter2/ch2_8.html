@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ArcGIS Web Development</title>
+    <link rel="stylesheet"
+    href="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css">
+    <style type="text/css">
+      #population {
+        float: right;
+      }
+      #map {
+        position: absolute;
+        top: 35px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <select id="population" name="population">
+      <option value="2500">2,500</option>
+      <option value="5000" selected="selected">5,000</option>
+      <option value="7500">7,500</option>
+    </select>
+    <div id="map"></div>
+  </body>
+  <script type="text/javascript"
+    src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+  <script type="text/javascript" src="ch2_8.js"></script>
+</html>
