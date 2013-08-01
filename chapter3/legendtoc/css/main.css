@@ -1,0 +1,90 @@
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px "helvetica neue", arial, helvetica, freesans, "libaration sans", "numbus sans l", sans-serif !important;
+    color: #fff;
+}
+ /* Menu style - start */
+
+#tools-menu {
+    list-style-type: none;
+}
+
+.description {
+    margin: 1em auto;
+    padding: 1em;
+    color: #7a99a5;
+}
+
+.dijitComboBoxMenuPopup {
+    font-size: 0.8em !important;
+}
+
+.dijitMenuPopup {
+    min-width: 150px;
+}
+
+.dijitMenuPopup .dijitMenuItemLabel {
+    width: 150px !important;
+}
+
+.dijitMenuBar {
+    padding: 5px !important;
+    border: 0 none lightGrey !important;
+    background-color: #53a145 !important;
+}
+
+.dijitMenuBar .dijitMenuItemLabel {
+    color: #fff !important;
+}
+
+.dijitMenuBar .dijitMenuItemLabel:hover {
+    background-color: #7f7f7f !important;
+}
+
+.dijitMenuBar .dijitMenuItemSelected {
+    background-color: #7f7f7f !important;
+}
+
+td {
+    line-height: 10px !important;
+}
+
+.lgnd-lbl {
+    font-weight: bold;
+}
+
+/* Menu style - end */
+.brand {
+    float: left !important;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    margin-bottom: 0 !important;
+    background: #53a145 !important;
+    background-color: #53a145 !important;
+}
+
+.nav {
+    margin-left: 50px;
+}
+
+#map {
+    position: absolute;
+    padding: 0;
+    top: 45px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
