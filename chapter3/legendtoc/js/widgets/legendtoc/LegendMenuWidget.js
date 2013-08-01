@@ -1,6 +1,3 @@
-/**
- * @author odoe@odoe.net (Rene Rubalcava)
- */
 /*global define esri console document*/
 (function () {
     'use strict';

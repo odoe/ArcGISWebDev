@@ -1,6 +1,3 @@
-/**
- * @author odoe@odoe.net (Rene Rubalcava)
- */
 /*global window document console define require */
 (function() {
     'use strict';
