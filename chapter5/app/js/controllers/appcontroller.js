@@ -1,8 +1,10 @@
 /*global define */
+/*jshint laxcomma: true*/
 (function () {
   'use strict';
 
   define([
+    'dojo/_base/array',
     'controllers/mapcontroller',
     'widgets/edit/editTools',
     'esri/toolbars/edit',
@@ -10,43 +12,50 @@
     'esri/dijit/editing/TemplatePicker',
     'esri/config',
     'esri/IdentityManager'
-  ], function (MapController, EditTools, Edit, Editor, TemplatePicker, esriConfig) {
+  ], function (array, MapController, EditTools, Edit, Editor, TemplatePicker, esriConfig) {
 
     function mapLoaded(map) {
-      console.debug('map has been loaded', map);
-      /*
-      var editTools = new EditTools({
-        map: map
-      }, 'map-tools');
-     */
+      //var editTools = new EditTools({
+      //  map: map
+      //}, 'map-tools');
 
-      var requestLayer = map.getLayer('Requests');
-      console.debug('request layer', requestLayer);
+      var requestLayer
+        , layers = []
+        , templatePicker;
 
-      var widget = new TemplatePicker({
-        featureLayers: [requestLayer],
-        rows: "auto",
+      requestLayer = map.getLayer('Requests');
+
+      layers.push(requestLayer);
+
+      templatePicker = new TemplatePicker({
+        featureLayers: layers,
+        rows: 'auto',
         columns: 1,
-        showTooltip: true,
       }, "template-div");
 
-      widget.startup();
+      templatePicker.startup();
 
-        var settings = {
-          map: map,
-          templatePicker: widget,
-          layerInfos:[ { 'featureLayer': requestLayer } ]
+      /*
+      var layerInfos = array.map(layers, function(layer) {
+        return {
+          featureLayer: layer
         };
-        var params = {settings: settings};
-        var editorWidget = new Editor(params);
-        editorWidget.startup();
+      });
 
-
+      var settings = {
+        map: map,
+        templatePicker: widget,
+        layerInfos: layerInfos
+      };
+      var params = { settings: settings };
+      var editorWidget = new Editor(params);
+      editorWidget.startup();
+     */
     }
 
     function _init(config) {
 
-      esriConfig.defaults.io.proxy = '/proxy/proxy/php';
+      //esriConfig.defaults.io.proxy = '/proxy/proxy/php';
 
       var mapCtrl = new MapController(config);
 
