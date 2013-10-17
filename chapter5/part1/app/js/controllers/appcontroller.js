@@ -35,7 +35,6 @@
 
       templatePicker.startup();
 
-      /*
       var layerInfos = array.map(layers, function(layer) {
         return {
           featureLayer: layer
@@ -44,13 +43,12 @@
 
       var settings = {
         map: map,
-        templatePicker: widget,
+        templatePicker: templatePicker,
         layerInfos: layerInfos
       };
       var params = { settings: settings };
       var editorWidget = new Editor(params);
-      editorWidget.startup();
-     */
+      //editorWidget.startup();
     }
 
     function _init(config) {
