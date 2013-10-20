@@ -17,8 +17,9 @@
     'dojo/dom-attr',
     'esri/graphic',
     // template
+    'widgets/edit/editService',
     'text!widgets/edit/editTools.tpl.html'
-  ], function(declare, lang, on, query, _WidgetBase, _TemplatedMixin, domAttr, Graphic, template) {
+  ], function(declare, lang, on, query, _WidgetBase, _TemplatedMixin, domAttr, Graphic, EditService, template) {
 
     return declare([_WidgetBase, _TemplatedMixin], {
 
@@ -38,6 +39,10 @@
         this.map = this.options.map;
         this.requestLayer = this.map.getLayer('Requests');
 
+        this.editService = new EditService({
+          layer: this.requestLayer
+        });
+
         // widget node
         this.domNode = srcRefNode;
       },
@@ -48,7 +53,8 @@
 
         this.handler.pause();
         this.own(
-          on(query('.btn-edit'), 'click', lang.hitch(this, this._toggleEditButton))
+          on(query('.btn-edit'), 'click', lang.hitch(this, this._toggleEditButton)),
+          on(query('.btn-sync'), 'click', lang.hitch(this, this._syncLocal))
         );
       },
       // public methods
@@ -56,6 +62,12 @@
       // widget methods
       _addRequest: function() {
         this._toggleEditButton();
+      },
+
+      _syncLocal: function() {
+        if (this.editService.hasLocal) {
+          this.editService.sync();
+        }
       },
 
       // private functions
@@ -75,10 +87,16 @@
 
         graphic = new Graphic(mapPt, null, attributes);
 
-        this.requestLayer.applyEdits([graphic]).then(lang.hitch(this, function() {
-          this._toggleEditButton();
-          alert('Request submitted');
-        }));
+        this.editService.add([graphic]).then(
+          lang.hitch(this, function() {
+            this._toggleEditButton();
+            alert('Request submitted');
+          }),
+          lang.hitch(this, function() {
+            this._toggleEditButton();
+            alert('Request saved locally');
+          })
+        );
       },
 
       _toggleEditButton: function(e) {
