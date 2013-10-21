@@ -9,6 +9,7 @@
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/_base/array',
+    'dojo/on',
     // Dijit stuff
     'dijit/_WidgetBase',
     'dijit/_TemplatedMixin',
@@ -16,7 +17,7 @@
     'dojo/dom-class',
     // template
     'text!widgets/edit/editTools.tpl.html',
-  ], function(declare, lang, array, _WidgetBase, _TemplatedMixin, domClass, template) {
+  ], function(declare, lang, array, on, _WidgetBase, _TemplatedMixin, domClass, template) {
 
     return declare([_WidgetBase, _TemplatedMixin], {
 
@@ -40,6 +41,12 @@
         // widget node
         this.domNode = srcRefNode;
 
+      },
+
+      postCreate: function() {
+        this.own(
+          on(this.editNode, 'click', lang.hitch(this, this._addRequest))
+        );
       },
 
       // start widget
