@@ -18,8 +18,9 @@
     'esri/graphic',
     // template
     'widgets/edit/editService',
+    'utils/symbolUtil',
     'text!widgets/edit/editTools.tpl.html'
-  ], function(declare, lang, on, query, _WidgetBase, _TemplatedMixin, domAttr, Graphic, EditService, template) {
+  ], function(declare, lang, on, query, _WidgetBase, _TemplatedMixin, domAttr, Graphic, EditService, symbolUtil, template) {
 
     return declare([_WidgetBase, _TemplatedMixin], {
 
@@ -65,6 +66,7 @@
       },
 
       _syncLocal: function() {
+        console.debug('has local?', this.editService.hasLocal);
         if (this.editService.hasLocal) {
           this.editService.sync();
         }
@@ -85,7 +87,7 @@
         attributes.Description = description;
         console.debug('attr', attributes);
 
-        graphic = new Graphic(mapPt, null, attributes);
+        graphic = new Graphic(mapPt, symbolUtil.simpleMarker(), attributes);
 
         this.editService.add([graphic]).then(
           lang.hitch(this, function() {
@@ -94,6 +96,7 @@
           }),
           lang.hitch(this, function() {
             this._toggleEditButton();
+            this.map.graphics.add(graphic);
             alert('Request saved locally');
           })
         );

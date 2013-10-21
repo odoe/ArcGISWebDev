@@ -21,7 +21,6 @@
 
       constructor: function(options) {
         declare.safeMixin(this, options);
-        this._adds = [];
         this._sync = [];
         this.check();
       },
@@ -35,21 +34,25 @@
       },
 
       sync: function() {
-        for (var name in window.localStorage) {
-          if (name.indexOf('request') > -1) {
-            var item = window.localStorage.getItem(name);
+        var keys = [];
+        for (var key in window.localStorage) {
+          if (key.indexOf('request') > -1) {
+            keys.push(key);
+            var item = window.localStorage.getItem(key);
             var graphic = new Graphic(dojoJson.parse(item));
             this._sync.push(graphic);
           }
         }
         if (this._sync.length > 0) {
-          console.debug('saved locally', this._sync);
           this.layer.applyEdits(this._sync)
             .then(
               lang.hitch(this, function() {
                 this._sync.length = 0;
                 this.hasLocal = false;
-                window.localStorage.removeItem(name);
+                for (var i = 0, key; (key = keys[i]); i++) {
+                  console.log('key to remove', key);
+                  window.localStorage.removeItem(key);
+                }
               }),
               lang.hitch(this, function() {
                 this._sync.length = 0;
@@ -66,18 +69,20 @@
           function() {
             deferred.resolve();
           },
-          function() {
-            console.debug('save to local storage');
-            for (var i = 0, item; (item = adds[i]); i++) {
-              try {
-                var id = Math.floor(1 + Math.random() * 1000);
-                window.localStorage.setItem('request-' + id, dojoJson.stringify(item.toJson()));
-              } catch (error) {
-                console.debug('Problem adding tile to local storage. Storage might be full');
-              }
-            }
-            deferred.reject();
-          }
+          lang.hitch(this,
+                     function() {
+                       for (var i = 0, item; (item = adds[i]); i++) {
+                         try {
+                           var id = Math.floor(1 + Math.random() * 1000);
+                           window.localStorage.setItem('request-' +
+                                                       id, dojoJson.stringify(item.toJson()));
+                           this.check();
+                         } catch (error) {
+                           alert('Problem adding request to local storage. Storage might be full');
+                         }
+                       }
+                       deferred.reject(adds);
+                     })
         );
 
         return deferred.promise;
