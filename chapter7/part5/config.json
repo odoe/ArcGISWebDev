@@ -1,0 +1,158 @@
+{
+  "widgets": [{
+    "type": "map",
+    "path": "widgets/map/map",
+    "options" : {
+      "id": "map-div",
+      "mapOptions": {
+        "center": [-118.242,34.050],
+        "zoom": 12
+      },
+      "webmap": {
+        "itemData": {
+          "baseMap": {
+            "baseMapLayers": [{
+              "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer",
+              "opacity" : 1,
+              "visibility": true
+            }]
+          },
+          "operationalLayers": [{
+            "url": "http://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/CensusLaborDemo/FeatureServer/1",
+            "id": "Census_Labor",
+            "visibility": true,
+            "opacity": 0.8,
+            "title": "Census Labor"
+          }, {
+            "url": "http://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/la_county_labor_centroid/FeatureServer/0",
+            "id": "Labor_Centroids",
+            "outFields": ['*'],
+            "opacity": 1,
+            "title": "Labor Centroids",
+            "popupInfo": {
+              "title": "{NAMELSAD}",
+              "fieldInfos": [{
+                "fieldName": "NAME",
+                "label": "Tract Number",
+                "visible": true
+              }, {
+                "fieldName": "TOTAL_POP",
+                "label": "Total Population",
+                "visible": true
+              }, {
+                "fieldName": "POP_LABOR",
+                "label": "Labor Population",
+                "visible": true
+              }, {
+                "fieldName": "LABOR_PCT",
+                "label": "Labor Pct",
+                "visible": true,
+                "format": {
+                  "places": 2
+                }
+              }]
+            },
+            "layerDefinition": {
+              "drawingInfo":{
+                "renderer":{
+                  "type":"classBreaks",
+                  "field":"LABOR_PCT",
+                  "defaultSymbol":null,
+                  "defaultLabel":"",
+                  "minValue":0,
+                  "classBreakInfos":[{
+                    "classMaxValue":0.25,
+                    "label":"0 - 25%",
+                    "description":"",
+                    "symbol":{
+                      "type":"esriSMS",
+                      "style":"esriSMSCircle",
+                      "color":[115,223,255,255],
+                      "size":4,
+                      "angle":0,
+                      "xoffset":0,
+                      "yoffset":0,
+                      "outline":{
+                        "color":[255,255,255,255],
+                        "width":1
+                      }
+                    }
+                  }, {
+                    "classMaxValue":0.5,
+                    "label":"25% - 50%",
+                    "description":"",
+                    "symbol":{
+                      "type":"esriSMS",
+                      "style":"esriSMSCircle",
+                      "color":[115,223,255,255],
+                      "size":7.5,
+                      "angle":0,
+                      "xoffset":0,
+                      "yoffset":0,
+                      "outline":{
+                        "color":[255,255,255,255
+                        ],
+                        "width":1
+                      }
+                    }
+                  }, {
+                    "classMaxValue":0.75,
+                    "label":"50% - 75%",
+                    "description":"",
+                    "symbol":{
+                      "type":"esriSMS",
+                      "style":"esriSMSCircle",
+                      "color":[115,223,255,255],
+                      "size":11,
+                      "angle":0,
+                      "xoffset":0,
+                      "yoffset":0,
+                      "outline":{
+                        "color":[255,255,255,255],
+                        "width":1
+                      }
+                    }
+                  }, {
+                    "classMaxValue":1.00,
+                    "label":"75% - 100%",
+                    "description":"",
+                    "symbol":{
+                      "type":"esriSMS",
+                      "style":"esriSMSCircle",
+                      "color":[115,223,255,255],
+                      "size":20,
+                      "angle":0,
+                      "xoffset":0,
+                      "yoffset":0,
+                      "outline":{
+                        "color":[255,255,255,255],
+                        "width":1
+                      }
+                    }
+                  }]
+                },
+                "transparency":0,
+              }
+            }
+          }]
+        }
+      }
+    }
+  }, {
+    "path": "esri/dijit/Geocoder",
+    "node": "search",
+    "options": {
+      "arcgisGeocoder": {
+        "url": "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+        "placeholder": "Enter address"
+      }
+    }
+  }, {
+    "path": "esri/dijit/LocateButton",
+    "node": "locate",
+    "target": "tool-container",
+    "options": {
+      "highlightLocation": true
+    }
+  }]
+}

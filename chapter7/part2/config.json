@@ -1,0 +1,23 @@
+{
+  "options": {
+    "basemap": "topo",
+    "center": [-118.210,34.285],
+    "zoom": 10
+  },
+  "widgets": [{
+    "path": "esri/dijit/Geocoder",
+    "node": "search",
+    "options": {
+      "arcgisGeocoder": {
+        "url": "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+        "placeholder": "Enter address"
+      }
+    }
+  }, {
+    "path": "esri/dijit/LocateButton",
+    "node": "locate",
+    "options": {
+      "highlightLocation": true
+    }
+  }]
+}

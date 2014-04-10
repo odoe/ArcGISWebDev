@@ -1,0 +1,13 @@
+{
+  "options": {
+    "basemap": "topo",
+    "center": [-118.210,34.285],
+    "zoom": 10
+  },
+  "geocoderOptions" : {
+    "arcgisGeocoder": {
+      "url": "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+      "placeholder": "Enter address"
+    }
+  }
+}

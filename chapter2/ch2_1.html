@@ -3,21 +3,21 @@
   <head>
     <title>ArcGIS Web Development</title>
     <link rel="stylesheet"
-      href="//serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
+    href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
   </head>
   <body>
     <div id="map"></div>
-  </body>
-  <script type="text/javascript"
-    src="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
-  <script type="text/javascript">
-    require(['esri/map'], function(Map) {
-      var map = new Map('map', {
-        basemap: 'streets',
-        autoResize: true,
-        center: [-118.2095, 34.0866],
-        zoom: 10
+    <script type="text/javascript"
+      src="http://js.arcgis.com/3.9/"></script>
+    <script type="text/javascript">
+      require(['esri/map'], function(Map) {
+        var map = new Map('map', {
+          basemap: 'streets',
+          autoResize: true,
+          center: [-118.2095, 34.0866],
+          zoom: 10
+        });
       });
-    });
-  </script>
+    </script>
+  </body>
 </html>

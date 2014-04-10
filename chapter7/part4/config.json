@@ -1,0 +1,25 @@
+{
+  "widgets": [{
+    "type": "map",
+    "path": "widgets/map/map",
+    "options" : {
+      "webmapid": "68d81103c4014bafa886226f15acf6ae"
+    }
+  }, {
+    "path": "esri/dijit/Geocoder",
+    "node": "search",
+    "options": {
+      "arcgisGeocoder": {
+        "url": "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+        "placeholder": "Enter address"
+      }
+    }
+  }, {
+    "path": "esri/dijit/LocateButton",
+    "node": "locate",
+    "target": "tool-container",
+    "options": {
+      "highlightLocation": true
+    }
+  }]
+}

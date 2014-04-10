@@ -1,0 +1,40 @@
+#map-div {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#map-div .container {
+  max-width: 100%;
+}
+
+#map-tools {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+#template-div {
+  position: absolute;
+  top: 50px;
+  right: 5px;
+}
+
+#measurement-div {
+  position: absolute;
+  background-color: #fff;
+  z-index: 1;
+  left: 65px;
+  top: 55px;
+  padding: 10px 80px 10px 10px;
+}
+
+#basemap-div {
+  position: absolute;
+  top: 55px;
+  right: 5px;
+  z-index: 1;
+}
+

@@ -4,7 +4,6 @@
 /*global define*/
 /*jshint laxcomma:true*/
 (function() {
-  'use strict';
   define([
     'dojo/_base/declare',
     'dojo/_base/lang',
@@ -25,18 +24,15 @@
 
       templateString: template,
 
-      options: {},
-
       editing: false,
-
-      map: null,
 
       // lifecycle 1
       constructor: function(options, srcRefNode) {
+      	this.inherited(arguments);
 
         // mix in settings and defaults
-        declare.safeMixin(this.options, options);
-        this.map = this.options.map;
+	this.options = options || {};
+        this.map = options.map;
 
         // widget node
         this.domNode = srcRefNode;
@@ -44,6 +40,7 @@
       },
 
       postCreate: function() {
+	console.debug('edit widget options', this.options);
         this.own(
           on(this.editNode, 'click', lang.hitch(this, this._addRequest))
         );

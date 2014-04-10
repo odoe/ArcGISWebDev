@@ -1,0 +1,30 @@
+html,body{
+  overflow-x:hidden;
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+ }
+ 
+ #map-div{
+  position:absolute;
+  padding:0;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+ }
+ 
+ #search {
+  position: absolute;
+  z-index: 2;
+  top: 5px;
+  right: 5px;
+ }
+ 
+ #locate {
+  position:absolute;
+  top:95px;
+  left:22px;
+  z-index:50;
+ }

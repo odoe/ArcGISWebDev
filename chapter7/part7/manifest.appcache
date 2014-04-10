@@ -1,0 +1,59 @@
+CACHE MANIFEST
+# v1
+CACHE:
+index.html
+config.json
+## css ##
+css/main.css
+http://js.arcgis.com/3.8/js/esri/css/esri.css
+
+## javascript files ##
+# esri
+http://js.arcgis.com/3.8compact/init.js
+http://js.arcgis.com/3.8compact/js/esri/arcgis/utils.js
+http://js.arcgis.com/3.8compact/js/esri/nls/jsapi_en-us.js
+http://js.arcgis.com/3.8compact/js/esri/tasks/RelationshipQuery.js
+http://js.arcgis.com/3.8compact/js/esri/tasks/StatisticDefinition.js
+http://js.arcgis.com/3.8compact/js/esri/dijit/Geocoder.js
+http://js.arcgis.com/3.8compact/js/esri/dijit/LocateButton.js
+http://js.arcgis.com/3.8compact/js/esri/tasks/AddressCandidate.js
+http://js.arcgis.com/3.8compact/js/esri/tasks/locator.js
+
+# dijit
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/focus.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/place.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/popup.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/scroll.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/sniff.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/typematic.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/wai.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base/window.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/BackgroundIframe.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/Destroyable.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/Viewport.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/WidgetSet.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_AttachMixin.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_TemplatedMixin.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_WidgetBase.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/_base.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/place.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/popup.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/selection.js
+http://js.arcgis.com/3.8compact/js/dojo/dijit/typematic.js
+
+# dojo
+http://js.arcgis.com/3.8compact/js/dojo/dojo/cache.js
+
+# dojox
+http://js.arcgis.com/3.8compact/js/dojo/dojox/gfx/svg.js
+
+# custom
+js/run.js
+js/main.js
+
+js/controllers/widgetloader.js
+
+js/widgets/map/map.js
+
+NETWORK:
+*

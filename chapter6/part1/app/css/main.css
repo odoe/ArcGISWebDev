@@ -1,0 +1,23 @@
+#map-div {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#map-div .container {
+  max-width: 100%;
+}
+
+#map-tools {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+#template-div {
+  position: absolute;
+  top: 50px;
+  right: 5px;
+}
