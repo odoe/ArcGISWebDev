@@ -1,11 +1,11 @@
 require([
-        'dojo/_base/connect',
-        'dojo/query',
+        'dojo/dom',
+        'dojo/on',
         'esri/map',
         'esri/layers/FeatureLayer',
         'esri/toolbars/draw',
         'esri/tasks/query'
-        ], function(connect, query, Map, FeatureLayer, Draw, Query) {
+        ], function(dom, on, Map, FeatureLayer, Draw, Query) {
             var map = new Map('map', {
                 basemap: 'streets',
                 autoResize: true,
@@ -17,16 +17,16 @@ require([
                 }),
             drawToolbar = new Draw(map);
 
-            connect.connect(drawToolbar, 'onDrawEnd', function(geometry){
+            on(drawToolbar, 'draw-end', function(evt){
                 drawToolbar.deactivate();
                 var query = new Query();
-                query.geometry = geometry;
+                query.geometry = evt.geometry;
                 featureLayer.selectFeatures(query);
             });
 
             map.addLayer(featureLayer);
 
-            query('#drawPolygon').on('click', function() {
+            on(dom.byId('drawPolygon'), 'click', function() {
                 drawToolbar.activate(Draw.POLYGON);
             });
 
