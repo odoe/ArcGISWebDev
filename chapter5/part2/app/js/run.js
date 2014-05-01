@@ -25,8 +25,7 @@
       location: locationPath + 'js/widgets'
     }, {
       name: 'app',
-      location: locationPath + 'js',
-      main: 'main'
+      location: locationPath + 'js'
     }]
   }, ['app']);
 

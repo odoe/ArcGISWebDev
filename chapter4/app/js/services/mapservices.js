@@ -9,7 +9,7 @@
     'utils/symbolUtil'
   ], function(FeatureLayer, SimpleRenderer, symbolUtil) {
 
-    function _loadServices(config) {
+    function loadServices(config) {
       var layers = []
       // census tract
         , censusLayer = new FeatureLayer('http://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/CensusLaborDemo/FeatureServer/1')
@@ -24,7 +24,7 @@
     }
 
     return {
-      loadServices: _loadServices
+      loadServices: loadServices
     };
 
   });

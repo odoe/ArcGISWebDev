@@ -16,7 +16,8 @@
       options: {},
 
       constructor: function(options) {
-        declare.safeMixin(this.options, options);
+        this.options = lang.mixin(this.options, options);
+        console.debug('options?', this.options);
       },
 
       // public methods

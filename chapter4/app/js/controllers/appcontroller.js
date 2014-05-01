@@ -1,29 +1,25 @@
 /*global define */
-(function () {
-  'use strict';
+define([
+  'controllers/mapcontroller',
+  'widgets/edit/editTools'
+], function (MapController, EditTools) {
 
-  define([
-    'controllers/mapcontroller',
-    'widgets/edit/editTools'
-  ], function (MapController, EditTools) {
+  function mapLoaded(map) {
+    console.debug('map has been loaded', map);
+    var editTools = new EditTools({
+      map: map
+    }, 'map-tools');
+  }
 
-    function mapLoaded(map) {
-      console.debug('map has been loaded', map);
-      var editTools = new EditTools({
-        map: map
-      }, 'map-tools');
-    }
+  function init(config) {
 
-    function _init(config) {
+    var mapCtrl = new MapController(config);
 
-      var mapCtrl = new MapController(config);
+    mapCtrl.load().then(mapLoaded);
+  }
 
-      mapCtrl.load().then(mapLoaded);
-    }
+  return {
+    init: init
+  };
 
-    return {
-      init: _init
-    };
-
-  });
-})();
+});
