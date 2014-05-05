@@ -10,8 +10,7 @@ define([
     getEmployees: function() {
       return esriRequest({
         url: 'data/data.json',
-        handleAs: 'json',
-        callbackParamName: 'callback'
+        handleAs: 'json'
       });
     }
   };

@@ -76,7 +76,7 @@ define([
 
       this.attrInspector = new AttributeInspector({
         layerInfos: layerInfos,
-      }, domConstruct.create('div'));
+      });
 
       on(this.attrInspector,
          'attribute-change',
@@ -137,12 +137,15 @@ define([
     },
 
     updateFields: function(layer) {
+      var domains = {};
+      arrayUtil.forEach(editConfig.fieldInfos, function(info) {
+        domains[info.fieldName] = info.domain;
+      });
+
       arrayUtil.forEach(layer.fields, function(field) {
-        arrayUtil.forEach(editConfig.fieldInfos, function(info) {
-          if (field.name === info.fieldName) {
-            field.domain = info.domain;
-          }
-        });
+        if (domains[field.name]) {
+          field.domain = domains[field.name];
+        }
       });
     }
   });
