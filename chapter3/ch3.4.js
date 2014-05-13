@@ -53,16 +53,13 @@ require([
           symbol.SimpleFillSymbol.STYLE_SOLID,
           new symbol.SimpleLineSymbol(
             symbol.SimpleLineSymbol.STYLE_SOLID,
-            new Color([255,0,0,0.65]), 1
+            new Color([255,0,0,0.65]), 2
           ),
           new Color([255,0,0,0.35])
         );
         arrayUtil.forEach(geometries, function (geom) {
           geometryArray.push(geom);
           map.graphics.add(new Graphic(geom, fill));
-          var query = new Query();
-          query.geometry = geom;
-          featureLayer.selectFeatures(query, FeatureLayer.SELECTION_NEW);
         });
         if (geometryArray.length > 1) {
           intersectGeometries();
@@ -86,6 +83,9 @@ require([
       );
       arrayUtil.forEach(geometries, function (geom) {
         map.graphics.add(new Graphic(geom, fill));
+        var query = new Query();
+        query.geometry = geom;
+        featureLayer.selectFeatures(query, FeatureLayer.SELECTION_NEW);
       });
     });
   }
@@ -93,3 +93,4 @@ require([
     drawTool.activate(Draw.POINT);
   });
 });
+
