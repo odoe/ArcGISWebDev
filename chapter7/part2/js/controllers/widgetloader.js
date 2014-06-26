@@ -7,14 +7,14 @@ define([
   'dojo/_base/array'
 ], function(
   require,
-  declare, lang, arrayUtil
+  declare, lang, arrayUtils
 ) {
-  return declare([], {
+  return declare(null, {
     constructor: function(options) {
       this.options = options;
     },
     startup: function() {
-      arrayUtil.forEach(
+      arrayUtils.forEach(
         this.options.widgets,
         this._widgetLoader,
         this

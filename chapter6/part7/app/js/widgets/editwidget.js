@@ -16,7 +16,7 @@ define([
   'utils/symbolutil',
   'services/employeeservice'
 ], function(
-  declare, lang, arrayUtil, event,
+  declare, lang, arrayUtils, event,
   domConstruct, on, Deferred,
   FeatureLayer, Query,
   Edit,
@@ -150,7 +150,7 @@ define([
         var fieldInfo
           , codedValues;
 
-        codedValues = arrayUtil.map(
+        codedValues = arrayUtils.map(
           data.employees,
           function(employee) {
             return {
@@ -174,11 +174,11 @@ define([
         editConfig.fieldInfos.push(fieldInfo);
 
         var domains = {};
-        arrayUtil.forEach(editConfig.fieldInfos, function(info) {
+        arrayUtils.forEach(editConfig.fieldInfos, function(info) {
           domains[info.fieldName] = info.domain;
         });
 
-        arrayUtil.forEach(layer.fields, function(field) {
+        arrayUtils.forEach(layer.fields, function(field) {
           if (domains[field.name]) {
             field.domain = domains[field.name];
           }

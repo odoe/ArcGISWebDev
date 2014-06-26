@@ -14,7 +14,7 @@ define([
   'utils/editconfig',
   'utils/symbolutil'
 ], function(
-  declare, lang, arrayUtil, event,
+  declare, lang, arrayUtils, event,
   domConstruct, on,
   FeatureLayer, Query,
   Edit,
@@ -138,11 +138,11 @@ define([
 
     updateFields: function(layer) {
       var domains = {};
-      arrayUtil.forEach(editConfig.fieldInfos, function(info) {
+      arrayUtils.forEach(editConfig.fieldInfos, function(info) {
         domains[info.fieldName] = info.domain;
       });
 
-      arrayUtil.forEach(layer.fields, function(field) {
+      arrayUtils.forEach(layer.fields, function(field) {
         if (domains[field.name]) {
           field.domain = domains[field.name];
         }

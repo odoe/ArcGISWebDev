@@ -3,7 +3,6 @@
 define([
   'dojo/_base/declare',
   'dojo/_base/lang',
-  'dojo/_base/array',
   // Dijit stuff
   'dijit/_WidgetBase',
   'dijit/_TemplatedMixin',
@@ -11,7 +10,7 @@ define([
   'dojo/dom-class',
   // template
   'text!widgets/edit/editTools.tpl.html',
-], function(declare, lang, array, _WidgetBase, _TemplatedMixin, domClass, template) {
+], function(declare, lang, _WidgetBase, _TemplatedMixin, domClass, template) {
   'use strict';
 
   return declare([_WidgetBase, _TemplatedMixin], {

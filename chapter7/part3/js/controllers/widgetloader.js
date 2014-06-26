@@ -10,7 +10,7 @@ define([
   'dojo/dom-construct'
 ], function(
   require,
-  declare, lang, arrayUtil,
+  declare, lang, arrayUtils,
   dom, domConstruct
 ) {
 
@@ -32,12 +32,12 @@ define([
     }
   }
 
-  return declare([], {
+  return declare(null, {
     constructor: function(options) {
       this.options = options;
     },
     startup: function() {
-      arrayUtil.forEach(
+      arrayUtils.forEach(
         this.options.widgets,
         this._widgetLoader,
         this

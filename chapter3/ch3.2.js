@@ -16,7 +16,7 @@ require([
 ], function (
   config, Map, Graphic, FeatureLayer,
   Draw, GeometryService, BufferParameters, Query,
-  symbol, on, dom, Color, arrayUtil
+  symbol, on, dom, Color, arrayUtils
 ) {
   config.defaults.io.proxyUrl = '/proxy/proxy.php';
   var map, geometryArray, geometryService, featureLayer, drawTool;
@@ -57,7 +57,7 @@ require([
           ),
           new Color([255,0,0,0.35])
         );
-        arrayUtil.forEach(geometries, function (geom) {
+        arrayUtils.forEach(geometries, function (geom) {
           geometryArray.push(geom);
           map.graphics.add(new Graphic(geom, fill));
           var query = new Query();
@@ -84,7 +84,7 @@ require([
         ),
         new Color([255, 0, 0, 0.15])
       );
-      arrayUtil.forEach(geometries, function (geom) {
+      arrayUtils.forEach(geometries, function (geom) {
         map.graphics.add(new Graphic(geom, fill));
       });
     });

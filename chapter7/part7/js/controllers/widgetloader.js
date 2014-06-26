@@ -12,7 +12,7 @@ define([
   'dojo/dom-construct'
 ], function(
   require,
-  declare, lang, arrayUtil,
+  declare, lang, arrayUtils,
   Deferred,
   on, dom, domConstruct
 ) {
@@ -20,7 +20,7 @@ define([
   function arrange(arr) {
     var mapwidget
       , widgets = [];
-    arrayUtil.forEach(arr, function(item) {
+    arrayUtils.forEach(arr, function(item) {
       if (item.type === 'map') {
         mapwidget = item;
       } else {
@@ -68,7 +68,7 @@ define([
     },
     _mapReady: function(params) {
       if (this.widgets.length > 0) {
-        arrayUtil.forEach(this.widgets, function(widget) {
+        arrayUtils.forEach(this.widgets, function(widget) {
           lang.mixin(widget.options, params);
           this._requireWidget(widget);
         }, this);

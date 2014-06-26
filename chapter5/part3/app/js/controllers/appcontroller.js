@@ -1,11 +1,10 @@
 /*global define */
 /*jshint laxcomma: true*/
 define([
-  'dojo/_base/array',
   'controllers/mapcontroller',
   'widgets/edit/editTools',
   'esri/IdentityManager'
-], function (array, MapController, EditTools) {
+], function (MapController, EditTools) {
 
   function mapLoaded(map) {
     var editTools = new EditTools({

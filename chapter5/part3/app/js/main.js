@@ -1,5 +1,4 @@
 /*global require*/
-/*jshint laxcomma:true*/
 require([
   'controllers/appcontroller',
   'services/mapservices',

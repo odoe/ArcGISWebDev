@@ -17,7 +17,7 @@ require([
   Draw, GeometryService,
   BufferParameters, Query,
   symbol, dom, on, Color,
-  arrayUtil
+  arrayUtils
 ) {
   var map, geometryService, featureLayer, drawTool;
   map = new Map('map', {
@@ -59,7 +59,7 @@ require([
                                                 symbol.SimpleLineSymbol.STYLE_SOLID,
                                                 new Color([255,0,0,0.65]), 2),
                                                 new Color([255,0,0,0.35]));
-        arrayUtil.forEach(geometries, function(geom) {
+        arrayUtils.forEach(geometries, function(geom) {
           map.graphics.add(new Graphic(geom, fill));
           var query = new Query();
           query.geometry = geom;
