@@ -9,7 +9,8 @@ define([
   'esri/config',
   'esri/domUtils',
   'esri/dijit/Measurement',
-  'esri/dijit/BasemapToggle'
+  'esri/dijit/BasemapToggle',
+  'widgets/editwidget'
 ], function (
   declare, lang,
   dom, on,
@@ -17,7 +18,8 @@ define([
   GeometryService,
   esriConfig,
   domUtils,
-  Measurement, BasemapToggle
+  Measurement, BasemapToggle,
+  EditWidget
 ) {
 
   var url = 'http://tasks.arcgisonline.com' +
@@ -61,6 +63,13 @@ define([
      }, 'basemap-div');
 
      this.basemaps.startup();
+
+      this.editWidget = new EditWidget({
+        map: this.map,
+        editLayer: this.map.getLayer('Requests')
+      });
+
+      this.editWidget.init();
     },
 
     toggleMeasurement: function(e) {

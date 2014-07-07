@@ -2,6 +2,7 @@
 define([
   'dojo/_base/declare',
   'dojo/_base/lang',
+  'dojo/_base/event',
   'dojo/dom',
   'dojo/on',
   'esri/map',
@@ -10,16 +11,18 @@ define([
   'esri/domUtils',
   'esri/dijit/Measurement',
   'esri/dijit/BasemapToggle',
-  'widgets/editwidget'
+  'esri/toolbars/edit',
+  'utils/symbolutil'
 ], function (
-  declare, lang,
+  declare, lang, event,
   dom, on,
   Map,
   GeometryService,
   esriConfig,
   domUtils,
   Measurement, BasemapToggle,
-  EditWidget
+  Edit,
+  symbolUtil
 ) {
 
   var url = 'http://tasks.arcgisonline.com' +
@@ -64,12 +67,28 @@ define([
 
      this.basemaps.startup();
 
-      this.editWidget = new EditWidget({
-        map: this.map,
-        editLayer: this.map.getLayer('Requests')
-      });
-
-      this.editWidget.init();
+     var layer = this.map.getLayer('Requests');
+     var editToolbar = new Edit(this.map);
+     var isEditing = false;
+     var defaultSymbol;
+     on(editToolbar, 'deactivate', function(e) {
+       if (e.info.isModified) {
+         e.graphic.setSymbol(defaultSymbol);
+         layer.applyEdits(null, [e.graphic], null);
+       }
+     });
+     on(layer, 'dbl-click', function(e) {
+       event.stop(e);
+       if (!isEditing) {
+         isEditing = true;
+         defaultSymbol = e.graphic.symbol;
+         e.graphic.setSymbol(symbolUtil.selectedSymbol());
+         editToolbar.activate(Edit.MOVE, e.graphic);
+       } else {
+         isEditing = false;
+         editToolbar.deactivate();
+       }
+     });
     },
 
     toggleMeasurement: function(e) {

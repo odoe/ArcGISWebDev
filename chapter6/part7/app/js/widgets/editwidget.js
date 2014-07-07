@@ -7,22 +7,19 @@ define([
   'dojo/_base/event',
   'dojo/dom-construct',
   'dojo/on',
-  'dojo/Deferred',
   'esri/layers/FeatureLayer',
   'esri/tasks/query',
   'esri/toolbars/edit',
   'esri/dijit/AttributeInspector',
   'utils/editconfig',
-  'utils/symbolutil',
-  'services/employeeservice'
+  'utils/symbolutil'
 ], function(
   declare, lang, arrayUtils, event,
-  domConstruct, on, Deferred,
+  domConstruct, on,
   FeatureLayer, Query,
   Edit,
   AttributeInspector, editConfig,
-  symbolUtil,
-  employeeService
+  symbolUtil
 ) {
   'use strict';
 
@@ -55,7 +52,6 @@ define([
       });
 
       this.editToolbar = new Edit(this.map);
-
       on(this.editToolbar, 'deactivate', lang.hitch(this,'onEditDeactivate'));
       on(this.map, 'click', lang.hitch(this, 'onMapClick'));
       on(this.editLayer, 'dbl-click', lang.hitch(this, 'onMoveFeature'));
@@ -64,26 +60,22 @@ define([
       if (!this.attrLayer.loaded) {
         on(this.attrLayer, 'load', lang.hitch(
           this,
-          function() {
-            this.updateFields(this.attrLayer).then(
-              lang.hitch(this, 'onFieldsReady')
-            );
-          }
+          'onLayerLoaded'
         ));
       }
-
     },
 
-    onFieldsReady: function(fieldInfos) {
+    onLayerLoaded: function() {
+      this.updateFields(this.attrLayer);
       var layerInfos = [{
         featureLayer: this.attrLayer,
         isEditable: true,
         showDeleteButton: false,
-        fieldInfos: fieldInfos
+        fieldInfos: editConfig.fieldInfos
       }];
 
       this.attrInspector = new AttributeInspector({
-        layerInfos: layerInfos
+        layerInfos: layerInfos,
       });
 
       on(this.attrInspector,
@@ -120,18 +112,18 @@ define([
         var query = new Query();
         query.objectIds = [e.graphic.attributes.OBJECTID];
         this.attrLayer.selectFeatures(query)
-          .then(lang.hitch(this, function(features) {
-            if (features.length) {
-              this.editFeature = features[0];
-              this.map.infoWindow.setTitle(this.attrLayer.name);
-              this.map.infoWindow.show(
-                e.screenPoint,
-                this.map.getInfoWindowAnchor(e.screenPoint)
-              );
-            } else {
-              this.map.infoWindow.hide();
-            }
-          }));
+        .then(lang.hitch(this, function(features) {
+          if (features.length) {
+            this.editFeature = features[0];
+            this.map.infoWindow.setTitle(this.attrLayer.name);
+            this.map.infoWindow.show(
+              e.screenPoint,
+              this.map.getInfoWindowAnchor(e.screenPoint)
+            );
+          } else {
+            this.map.infoWindow.hide();
+          }
+        }));
       }
     },
 
@@ -145,51 +137,18 @@ define([
     },
 
     updateFields: function(layer) {
-      var deferred = new Deferred();
-      employeeService.getEmployees().then(function(data) {
-        var fieldInfo
-          , codedValues;
-
-        codedValues = arrayUtils.map(
-          data.employees,
-          function(employee) {
-            return {
-              name: employee.name,
-              code: employee.id
-            };
-          }
-        );
-
-        fieldInfo = {
-          fieldName: 'Assignee',
-          isEditable: true,
-          label: 'Assigned To',
-          domain: {
-            type: 'codedValue',
-            name: 'employeeDomain',
-            codedValues: codedValues
-          }
-        };
-
-        editConfig.fieldInfos.push(fieldInfo);
-
-        var domains = {};
-        arrayUtils.forEach(editConfig.fieldInfos, function(info) {
-          domains[info.fieldName] = info.domain;
-        });
-
-        arrayUtils.forEach(layer.fields, function(field) {
-          if (domains[field.name]) {
-            field.domain = domains[field.name];
-          }
-        });
-
-        deferred.resolve(editConfig.fieldInfos);
-
+      var domains = {};
+      arrayUtils.forEach(editConfig.fieldInfos, function(info) {
+        domains[info.fieldName] = info.domain;
       });
-      return deferred.promise;
+
+      arrayUtils.forEach(layer.fields, function(field) {
+        if (domains[field.name]) {
+          field.domain = domains[field.name];
+        }
+      });
     }
   });
-
 });
+
 

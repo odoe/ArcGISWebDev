@@ -2,7 +2,7 @@
 /*jshint laxcomma:true*/
 define([
   'esri/layers/FeatureLayer',
-  'utils/symbolutil'
+  'utils/symbolUtil'
 ], function(FeatureLayer, symbolUtil) {
 
   function _loadServices(config) {

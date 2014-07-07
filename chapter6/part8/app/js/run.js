@@ -21,6 +21,9 @@
       name: 'utils',
       location: locationPath + '/js/utils'
     }, {
+      name: 'widgets',
+      location: locationPath + '/js/widgets'
+    }, {
       name: 'app',
       location: locationPath + '/js',
       main: 'main'

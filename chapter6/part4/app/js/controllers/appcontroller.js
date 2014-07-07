@@ -8,8 +8,7 @@ define([
   'esri/tasks/GeometryService',
   'esri/config',
   'esri/domUtils',
-  'esri/dijit/Measurement',
-  'esri/dijit/BasemapToggle'
+  'esri/dijit/Measurement'
 ], function (
   declare, lang,
   dom, on,
@@ -17,7 +16,7 @@ define([
   GeometryService,
   esriConfig,
   domUtils,
-  Measurement, BasemapToggle
+  Measurement
 ) {
 
   var url = 'http://tasks.arcgisonline.com' +
@@ -54,13 +53,6 @@ define([
       }, 'measurement-div');
       domUtils.hide(dom.byId('measurement-div'));
      this. measurement.startup();
-
-     this.basemaps = new BasemapToggle({
-       map: this.map,
-       basemap: 'hybrid'
-     }, 'basemap-div');
-
-     this.basemaps.startup();
     },
 
     toggleMeasurement: function(e) {
