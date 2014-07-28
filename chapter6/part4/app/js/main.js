@@ -4,7 +4,8 @@ require([
   'esri/config',
   'dojo/dom',
   'dojo/on',
-  'utils/OAuthHelper',
+  'esri/arcgis/OAuthInfo',
+  'esri/IdentityManager',
   'utils/securityUtil',
   'controllers/appcontroller',
   'services/mapservices',
@@ -12,7 +13,7 @@ require([
 ], function (
   esriConfig,
   dom, on,
-  OAuthHelper, securityUtil,
+  OAuthInfo, esriId, securityUtil,
   AppCtrl,
   mapServices
 ) {
@@ -21,12 +22,14 @@ require([
   //esriConfig.defaults.io.proxyUrl = '/app/proxy.ashx';
   //esriConfig.defaults.io.alwaysUseProxy = true;
 
-  OAuthHelper.init({
+  var info = new OAuthInfo({
     appId: 'zppZ53G093yZV7tG',
     portal: 'http://www.arcgis.com',
     expiration: (14 * 24 * 60),
     popup: false
   });
+
+  esriId.registerOAuthInfos([info]);
 
   function startApplication() {
     dom.byId('signin-elem').innerHTML = 'Sign Out';
@@ -45,23 +48,29 @@ require([
 
   function clearApplication() {
     securityUtil.removeCredentials();
-    OAuthHelper.signOut();
+    esriId.destroyCredentials();
+    location.reload();
   }
 
-  if (OAuthHelper.isSignedIn()) {
-    securityUtil.saveCredentials().then(startApplication);
-  } else {
-    securityUtil.loadCredentials().then(function(success) {
-      if (success) {
-        startApplication();
+  esriId.checkSignInStatus(info.portalUrl)
+    .then(function() {
+      securityUtil.saveCredentials().then(startApplication);
+    })
+    .otherwise(
+      function() {
+        securityUtil.loadCredentials().then(function(success) {
+          if (success) {
+            startApplication();
+          }
+        });
       }
-    });
-  }
+  );
 
   on(dom.byId('signin-elem'), 'click', function(e) {
     e.preventDefault();
     if (e.target.innerHTML === 'Sign In') {
-      OAuthHelper.signIn().then(startApplication);
+      esriId.getCredential(info.portalUrl)
+        .then(startApplication);
     } else {
       clearApplication();
     }

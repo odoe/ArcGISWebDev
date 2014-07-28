@@ -1,14 +1,17 @@
 require([
-  'utils/OAuthHelper',
+  'esri/arcgis/OAuthInfo',
+  'esri/IdentityManager',
   'controllers/appcontroller',
   'services/mapservices',
   'dojo/domReady!'
 ], function (
-  OAuthHelper,
+  OAuthInfo, esriId,
   AppCtrl,
   mapServices
 ) {
   'use strict';
+
+  esriId.destroyCredentials();
 
   function startApplication() {
     var appCtrl = new AppCtrl({
@@ -23,18 +26,23 @@ require([
     appCtrl.load();
   }
 
-  OAuthHelper.init({
+  var info = new OAuthInfo({
     appId: 'zppZ53G093yZV7tG',
     portal: 'http://www.arcgis.com',
     expiration: (14 * 24 * 60),
     popup: false
   });
 
-  if (OAuthHelper.isSignedIn()) {
-    startApplication();
-  } else {
-    OAuthHelper.signIn().then(startApplication);
-  }
+  esriId.registerOAuthInfos([info]);
+
+  esriId.checkSignInStatus(info.portalUrl)
+    .then(startApplication)
+    .otherwise(
+      function() {
+        esriId.getCredential(info.portalUrl)
+        .then(startApplication);
+      }
+  );
 
 });
 

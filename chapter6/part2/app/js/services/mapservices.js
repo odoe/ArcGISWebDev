@@ -1,9 +1,8 @@
 /*global define*/
 /*jshint laxcomma:true*/
 define([
-  'esri/layers/FeatureLayer',
-  'utils/symbolUtil'
-], function(FeatureLayer, symbolUtil) {
+  'esri/layers/FeatureLayer'
+], function(FeatureLayer) {
 
   function _loadServices(config) {
     var layers = []
