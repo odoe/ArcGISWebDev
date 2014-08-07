@@ -1,11 +1,7 @@
-/*global window document console define require */
-(function() {
-    'use strict';
-
     define([
         'dojo/_base/declare',
         'dijit/CheckedMenuItem',
-        'text!widgets/legendtoc/templates/LegendCheckedMenuItem.html',
+        'text!widgets/legendtoc/templates/LegendCheckedMenuItem.tpl.html',
         'dijit/hccss'
         ], function(declare, CheckedMenuItem, template) {
             /**
@@ -20,7 +16,3 @@
 
             return LegendCheckedMenuItem;
         });
-
-}).call(this);
-
-

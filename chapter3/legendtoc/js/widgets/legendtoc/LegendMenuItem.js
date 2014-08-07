@@ -1,11 +1,7 @@
-/*global window document console define require */
-(function() {
-    'use strict';
-
     define([
         'dojo/_base/declare',
         'dijit/MenuItem',
-        'text!widgets/legendtoc/templates/LegendMenuItem.html',
+        'text!widgets/legendtoc/templates/LegendMenuItem.tpl.html',
         'dijit/hccss'
         ], function(declare, MenuItem, template) {
 
@@ -23,6 +19,3 @@
             return LegendMenuItem;
 
         });
-
-}).call(this);
-
