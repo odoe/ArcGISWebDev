@@ -9,12 +9,15 @@ define([
   'dojo/Deferred',
   'dojo/on',
   'dojo/dom',
-  'dojo/dom-construct'
+  'dojo/dom-construct',
+  
+  'dijit/_WidgetBase'
 ], function(
   require,
   declare, lang, arrayUtils,
   Deferred,
-  on, dom, domConstruct
+  on, dom, domConstruct,
+  _WidgetBase
 ) {
 
   function arrange(arr) {
@@ -51,7 +54,7 @@ define([
     }
   }
 
-  return declare(null, {
+  return declare([ _WidgetBase], {
     constructor: function(options) {
       this.options = options;
     },

@@ -5,7 +5,7 @@ index.html
 config.json
 ## css ##
 css/main.css
-http://js.arcgis.com/3.8/js/esri/css/esri.css
+http://js.arcgis.com/3.11/esri/css/esri.css
 
 ## javascript files ##
 # esri
