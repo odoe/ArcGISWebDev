@@ -2,7 +2,7 @@
 define([
   'esri/layers/FeatureLayer',
   'esri/renderers/SimpleRenderer',
-  'utils/symbolUtil'
+  'utils/symbolutil'
 ], function(FeatureLayer, SimpleRenderer, symbolUtil) {
 
   function _loadServices(config) {

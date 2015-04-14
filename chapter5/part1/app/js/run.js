@@ -4,7 +4,7 @@
   'use strict';
 
   var pathRX = new RegExp(/\/[^\/]+$/)
-    , locationPath = location.pathname.replace(pathRX, '');
+    , locationPath = location.pathname.replace(pathRX, '/');
 
   require({
     async: true,
